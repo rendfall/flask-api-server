@@ -12,13 +12,6 @@ def index():
         Lorem = 'Ipsum'
     )
 
-@server.route('/solar-system', methods = ['GET'])
-def get_solar_system():
-    # Source: https://raw.githubusercontent.com/duckduckgo/zeroclickinfo-goodies/master/share/goodie/cheat_sheets/json/solar-system.json
-    file = open('data/solar-system.json')
-    content = json.load(file)
-    return jsonify(content)
-
 @server.route('/planet/<name>', methods = ['GET'])
 def get_planet(name):
     data = mongo.db.planets.find_one_or_404({ 'name': name })
