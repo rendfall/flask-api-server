@@ -22,7 +22,7 @@ def get_solar_system():
 @server.route('/planet/<name>', methods = ['GET'])
 def get_planet(name):
     data = mongo.db.planets.find_one_or_404({ 'name': name })
-    return jsonify({ name: data['name'] })
+    return jsonify({ 'name': data['name'] })
 
 @server.route('/planet', methods = ['POST'])
 def add_planet():
@@ -30,6 +30,13 @@ def add_planet():
     planet_id = mongo.db.planets.insert({ 'name': name })
     new_planet = mongo.db.planets.find_one({ '_id': planet_id })
     return jsonify({ 'name' : new_planet['name'] })
+
+@server.route('/planet/<name>', methods = ['PUT'])
+def update_planet(name):
+    new_name = request.json['name']
+    planet_id = mongo.db.planets.update({ 'name': name }, { 'name': new_name })
+    updated_planet = mongo.db.planets.find_one({ 'name': new_name })
+    return jsonify({ 'name' : updated_planet['name'] })
 
 if __name__ == '__main__':
     server.run(host = '0.0.0.0', debug = True)
