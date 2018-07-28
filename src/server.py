@@ -38,6 +38,11 @@ def update_planet(name):
     updated_planet = mongo.db.planets.find_one({ 'name': new_name })
     return jsonify({ 'name' : updated_planet['name'] })
 
+@server.route('/planet/<name>', methods = ['DELETE'])
+def delete_planet(name):
+    mongo.db.planets.remove({ 'name': name })
+    return jsonify({ 'name': name });
+
 if __name__ == '__main__':
     server.run(host = '0.0.0.0', debug = True)
     # server.run(host = '0.0.0.0')
