@@ -6,3 +6,5 @@
 
 * [Python 2.7.x](https://www.python.org/download/releases/2.7/)
 * [Flask](http://flask.pocoo.org/)
+* [MongoDB](https://www.mongodb.com/)
+* [PyMongo](https://api.mongodb.com/python/current/)
